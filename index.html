@@ -121,7 +121,7 @@
           <div class="ui blue top attached trans segment" v-if="locations[0].style.active">
             <div class="ui grid">
               <div class="six wide column" style="background-color:rgba(9, 97, 214, 0.18);color:rgba(255, 255, 255, 0.72)">
-                <h3 class="ui header">第一层：闪金镇</h3>
+                <div class="ui header">第一层：闪金镇</div>
                 cdscsd  c s c sdc
                 <div class="ui trans0 card">
                   <div class="image">
@@ -161,7 +161,10 @@
                   </div>
                   <div class="content">
                     <h3 class="ui header">{{district.name}}</h3>
-                    {{district.content}}
+                    <!-- <div class="meta"> -->
+                      {{district.content}}
+                    <!-- </div> -->
+
                   </div>
                   <div class="extra content">
                     <button class="ui green inverted button" type="button" name="button">Go there.</button>
