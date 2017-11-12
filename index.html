@@ -178,23 +178,23 @@
 
           </div>
         </div>
-        <div class="four wide column">
+        <div class="four wide column" id="info-app">
           <div class="ui blue trans segment">
             <h3 class="ui header">Phantom Tiger</h3>
             <div class="ui circular image" id="user-image">
-              <img src="https://avatars3.githubusercontent.com/u/22167673?s=460&v=4" alt="">
+              <img :src="user.image" alt="">
             </div>
             <div class="ui trans0 inverted segment">
               <div class="ui yellow inverted small progress" id="experience">
                 <div class="bar">
                   <div class="progress"></div>
                 </div>
-                <div class="label">720/1000</div>
+                <div class="label">{{user.exp}}</div>
               </div>
-              <h3 class="ui inverted header">Chen Hao</h3>
+              <h3 class="ui inverted header">{{user.name}}</h3>
               <div class="description">
-                <i class="selected yellow radio icon"></i>264
-                <i class="selected orange idea icon"></i>12
+                <i class="selected yellow radio icon"></i>{{user.money}}
+                <i class="selected orange idea icon"></i>{{user.solved}}
               </div>
               <script type="text/javascript">
                 $('#experience').progress({percent: 72});
@@ -257,6 +257,18 @@
             this.locations[this.location].style.active = false;
             this.locations[i].style.active = true;
             this.location = i;
+          }
+        }
+      });
+      var infoApp = new Vue({
+        el: "#info-app",
+        data:{
+          user:{
+            exp:72,
+            image:"https://avatars3.githubusercontent.com/u/22167673?s=460&v=4",
+            name:"Chen Hao",
+            money:258,
+            solved:72
           }
         }
       });
