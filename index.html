@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="./semantic/semantic.css">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js">
+
+    </script>
+    <script src="semantic/semantic.js">
+
+    </script>
+    <script src="./vue.js">
+
+    </script>
+    <style media="screen">
+      body{
+        background-image: url("images/world1.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+      }
+      .ui.trans.segment{
+        background-color: rgba(3, 14, 48, 0.38);
+      }
+      .ui.trans0.card{
+        background-color: rgba(3, 14, 48, 0.08);
+        box-shadow: 0px 1px 3px 0px rgba(90, 184, 237, 0.8), 0px 0px 0px 1px rgba(90, 184, 237, 0.8)
+      }
+      .ui.trans0.card > .image{
+        height:120px;
+        overflow-y: hidden;
+      }
+      .ui.blue.top.attached.trans.segment{
+        border-color: rgba(3, 14, 48, 0.38);
+      }
+      .ui.trans0.segment{
+        background-color: rgba(3, 14, 48, 0.08);
+      }
+      .ui.trans0.menu{
+        background-color: rgba(3, 14, 48, 0.08);
+      }
+      .ui.celled.padded.inverted.trans0.table{
+        background-color: rgba(3, 14, 48, 0.08);
+      }
+      .ui.celled.padded.inverted.trans0.table > thead th{
+        background-color: rgba(3, 14, 48, 0.38);
+      }
+      .ui.inverted.bottom.attached.tabular.trans.menu .active.item{
+        background-color: rgba(3, 14, 48, 0.38);
+        border-color: rgba(3, 14, 48, 0.38);
+      }
+      #main-grid{
+        margin-top: 2em;
+      }
+      #user-image{
+        position: relative;
+        width:6em;
+        height:6em;
+        left: 50%;
+        transform: translate(-50%, 0);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ui container">
+      <div class="ui grid" id="main-grid">
+
+        <div class="twelve wide column" id="operate-app">
+
+          <div class="ui blue top attached trans segment" v-if="false">
+            <div class="ui secondary pointing menu">
+              <a class="active item">城镇</a>
+              <a class="item">狩猎场</a>
+              <a class="item">挑战区</a>
+              <a class="item">BOSS</a>
+            </div>
+            <table class="ui celled padded inverted trans0 table">
+              <thead>
+                <tr><th class="single line">成就评分</th>
+                <th>成就</th>
+                <th>完成情况</th>
+                <th>描述</th>
+              </tr></thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <h2 class="ui center aligned header">A</h2>
+                  </td>
+                  <td class="single line">
+                    Power Output
+                  </td>
+
+                  <td class="right aligned">
+                    80% <br>
+                    <a href="#">18 studies</a>
+                  </td>
+                  <td>Creatine supplementation is the reference compound for increasing muscular creatine levels; there is variability in this increase, however, with some nonresponders.</td>
+                </tr>
+                <tr>
+                  <td>
+                    <h2 class="ui center aligned header">A</h2>
+                  </td>
+                  <td class="single line">
+                    Weight
+                  </td>
+
+                  <td class="right aligned">
+                    100% <br>
+                    <a href="#">65 studies</a>
+                  </td>
+                  <td>Creatine is the reference compound for power improvement, with numbers from one meta-analysis to assess potency</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="ui blue top attached trans segment" v-if="locations[0].style.active">
+            <div class="ui grid">
+              <div class="six wide column" style="background-color:rgba(9, 97, 214, 0.18);color:rgba(255, 255, 255, 0.72)">
+                <h3 class="ui header">第一层：闪金镇</h3>
+                cdscsd  c s c sdc
+                <div class="ui trans0 card">
+                  <div class="image">
+                    <img src="images/city1.jpg" alt="">
+                  </div>
+
+                </div>
+                <div class="content">
+                  在闪金镇，有一个诡异的房间，楼下住着教导剥皮的训练师，是2个女人，而他们的男人失踪了，被质疑为那个女人杀了她的丈夫并把尸体藏在了柜子下面。在女人房间的楼上，正是5个暴风城的孩子，而这5个孩子所在的房间内有着诡异的音乐！与其他孩子不同，他们不会四处打闹，他们始终盯着墙看，仿佛发现了什么我们看不见的东西。他们站成了五芒星的阵形，随着时间不同，他们站的位置不同，并且最终消失在墙里！
+                </div>
+                <div class="ui divider">
+
+                </div>
+                <div class="extra content">
+                  <button class="ui inverted green button" type="button" name="button">前往闪金镇</button>
+                </div>
+              </div>
+              <div class="ten wide column">
+                <div class="ui red inverted segment">
+                  第三层: 铁炉堡
+                </div>
+                <div class="ui orange inverted segment">
+                  第二层: 暴风城
+                </div>
+                <div class="ui yellow inverted segment">
+                  第一层: 闪金镇
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="ui blue top attached trans segment" v-if="locations[1].style.active">
+            <div class="ui grid">
+              <div class="eight wide column" v-for="one in [1,1,1,1]">
+                <div class="ui trans0 card" style="margin:auto">
+                  <div class="image">
+                    <img src="images/city1.jpg" alt="">
+                  </div>
+                  <div class="content">
+                    <h3 class="ui header">Market</h3>
+                    scda acd sa dc a dc a dc.
+                  </div>
+                  <div class="extra content">
+                    <button class="ui greed inverted button" type="button" name="button">Go there.</button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="ui inverted bottom attached tabular trans menu">
+            <a v-for="(loc,i) in locations" class="item" :class="loc.style" @click="gotoLocation(i)">
+              {{loc.name}}
+            </a>
+
+          </div>
+        </div>
+        <div class="four wide column">
+          <div class="ui blue trans segment">
+            <h3 class="ui header">Phantom Tiger</h3>
+            <div class="ui circular image" id="user-image">
+              <img src="https://avatars3.githubusercontent.com/u/22167673?s=460&v=4" alt="">
+            </div>
+            <div class="ui trans0 inverted segment">
+              <div class="ui yellow inverted small progress" id="experience">
+                <div class="bar">
+                  <div class="progress"></div>
+                </div>
+                <div class="label">720/1000</div>
+              </div>
+              <h3 class="ui inverted header">Chen Hao</h3>
+              <div class="description">
+                <i class="selected yellow radio icon"></i>264
+                <i class="selected orange idea icon"></i>12
+              </div>
+              <script type="text/javascript">
+                $('#experience').progress({percent: 72});
+              </script>
+            </div>
+            <div class="ui trans0 inverted vertical pointing menu">
+              <a class="active item">成就</a>
+              <a class="item">装备</a>
+              <a class="item">公会</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      var operateApp = new Vue({
+        el: "#operate-app",
+        data:{
+          test:0,
+          location:0,
+          locations: [
+            {
+              name: "世界",
+              style: {
+                  active: true
+              }
+            },
+            {
+              name: "城镇",
+              style: {
+                  active: false
+              }
+            }
+          ]
+        },
+        methods:{
+          gotoLocation:function(i){
+            this.locations[this.location].style.active = false;
+            this.locations[i].style.active = true;
+            this.location = i;
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
