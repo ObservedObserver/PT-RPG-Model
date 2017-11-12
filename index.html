@@ -24,8 +24,12 @@
         background-color: rgba(3, 14, 48, 0.38);
       }
       .ui.trans0.card{
+        color: rgba(255,255,255,0.72);
         background-color: rgba(3, 14, 48, 0.08);
         box-shadow: 0px 1px 3px 0px rgba(90, 184, 237, 0.8), 0px 0px 0px 1px rgba(90, 184, 237, 0.8)
+      }
+      .ui.trans0.card .header{
+        color: rgba(255,255,255,0.72);
       }
       .ui.trans0.card > .image{
         height:120px;
@@ -150,17 +154,17 @@
           </div>
           <div class="ui blue top attached trans segment" v-if="locations[1].style.active">
             <div class="ui grid">
-              <div class="eight wide column" v-for="one in [1,1,1,1]">
+              <div class="eight wide column" v-for="district in town">
                 <div class="ui trans0 card" style="margin:auto">
                   <div class="image">
-                    <img src="images/city1.jpg" alt="">
+                    <img :src="district.cover" alt="">
                   </div>
                   <div class="content">
-                    <h3 class="ui header">Market</h3>
-                    scda acd sa dc a dc a dc.
+                    <h3 class="ui header">{{district.name}}</h3>
+                    {{district.content}}
                   </div>
                   <div class="extra content">
-                    <button class="ui greed inverted button" type="button" name="button">Go there.</button>
+                    <button class="ui green inverted button" type="button" name="button">Go there.</button>
                   </div>
                 </div>
               </div>
@@ -223,6 +227,28 @@
               style: {
                   active: false
               }
+            }
+          ],
+          town: [
+            {
+              name: "市场",
+              cover: "./images/city1.jpg",
+              content: "用于玩家交易"
+            },
+            {
+              name: "挑战区",
+              cover: "./images/city2.jpg",
+              content: "通往下一层的必经之路"
+            },
+            {
+              name: "狩猎场",
+              cover: "./images/city3.jpg",
+              content: "用于练习升级"
+            },
+            {
+              name: "学校",
+              cover: "./images/city4.jpg",
+              content: "获取攻略情报与技能"
             }
           ]
         },
