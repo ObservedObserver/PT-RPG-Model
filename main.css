@@ -1,0 +1,62 @@
+body{
+  background-image: url("images/world1.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+.ui.trans.segment{
+  background-color: rgba(3, 14, 48, 0.38);
+}
+.ui.trans0.card{
+  color: rgba(255,255,255,0.72);
+  background-color: rgba(3, 14, 48, 0.08);
+  box-shadow: 0px 1px 3px 0px rgba(90, 184, 237, 0.8), 0px 0px 0px 1px rgba(90, 184, 237, 0.8)
+}
+.ui.trans0.card .header{
+  color: rgba(255,255,255,0.72);
+}
+.ui.trans0.card > .image{
+  height:120px;
+  overflow-y: hidden;
+}
+.ui.blue.top.attached.trans.segment{
+  border-color: rgba(3, 14, 48, 0.38);
+}
+.ui.trans0.segment{
+  background-color: rgba(3, 14, 48, 0.08);
+  color: rgba(255,255,255,0.72);
+  overflow: auto;
+}
+.ui.tran0.form{
+  background-color: rgba(3, 14, 48, 0.08);
+}
+.trans-input{
+  background-color: rgba(3, 14, 48, 0.08) !important;
+  color: #000;
+}
+.ui.trans0.menu{
+  background-color: rgba(3, 14, 48, 0.08);
+}
+.ui.celled.padded.inverted.trans0.table{
+  background-color: rgba(3, 14, 48, 0.08);
+}
+.ui.celled.padded.inverted.trans0.table > thead th{
+  background-color: rgba(3, 14, 48, 0.38);
+}
+.ui.inverted.bottom.attached.tabular.trans.menu .active.item{
+  background-color: rgba(3, 14, 48, 0.38);
+  border-color: rgba(3, 14, 48, 0.38);
+}
+#main-grid{
+  margin-top: 2em;
+}
+#operate-app{
+  max-width: 720px;
+}
+#user-image{
+  position: relative;
+  width:6em;
+  height:6em;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
