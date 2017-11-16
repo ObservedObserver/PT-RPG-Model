@@ -22,30 +22,35 @@ var operateApp = new Vue({
         name: "市场",
         cover: "./images/city1.jpg",
         content: "用于玩家交易",
-        active: false
+        active: 0
       },
       {
         name: "挑战区",
         cover: "./images/city2.jpg",
         content: "通往下一层的必经之路",
-        active: false
+        active: 0
       },
       {
         name: "狩猎场",
         cover: "./images/city3.jpg",
         content: "用于练习升级",
-        active: false
+        active: 0
       },
       {
         name: "学校",
         cover: "./images/city4.jpg",
         content: "获取攻略情报与技能",
-        active: false
+        active: 0
       }
     ],
     subtown: -1,
     fileButtonName: "Choose",
-    ans_file: false
+    ans_file: false,
+    problem: {
+      content:"no data"
+    },
+    lessons:[],
+    current_lesson:{}
   },
   methods:{
     gotoLocation:function(i){
@@ -54,9 +59,41 @@ var operateApp = new Vue({
       this.location = i;
     },
     gotoSubtown:function(i){
+      var self = this;
+      var gotoChallenge = function(){
+        $.ajax({
+          url:"./server/problem/boss1.md",
+          // dataType:"json",
+          method:"get",
+          success:function(res){
+            console.log("get the problem:",res);
+            var converter = new showdown.Converter(),
+            text = res,
+            html = converter.makeHtml(text);
+            self.problem.content = html;
+            // self.porblem = res;
+          }
+        })
+      };
+      var gotoSchool = function(){
+        $.ajax({
+          url:"./server/problem/video.json",
+          method:"get",
+          dataType:"json",
+          success:function(res){
+            self.lessons = res;
+          }
+        });
+      }
       console.log("goto subtown:",i);
       console.log(this.town[i].active);
       this.town[i].active = true;
+      if(i == 1){
+        console.log("gotoChallenge()");
+        gotoChallenge();
+      }else if(i == 3){
+        gotoSchool();
+      }
       this.subtown = i;
     },
     leaveSubtown:function(){
@@ -65,8 +102,17 @@ var operateApp = new Vue({
         return;
       }
       // console.log(this.subtown)
-      this.town[this.subtown].active = false;
+      this.town[this.subtown].active = 0;
       this.subtown = -1;
+    },
+    gotoLesson:function(i){
+      console.log("gotoLesson(i).");
+      this.current_lesson = this.lessons[i];
+      this.town[this.subtown].active = 2;
+    },
+    leaveLesson:function(){
+      this.current_lesson = {};
+      this.town[this.subtown].active = 1;
     },
     fileHandler:function(){
       console.log("submit button is clicked.");

@@ -1,0 +1,23 @@
+[
+  {
+    "title":"What is Alexnet?",
+    "author":"Chen Hao",
+    "type":"deeplearning",
+    "content":"how Alexnet work",
+    "cover":"https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=139602201,2734336293&fm=27&gp=0.jpg"
+  },
+  {
+    "title":"What is LeNet?",
+    "author":"Chen Hao",
+    "type":"deeplearning",
+    "content":"how lenet work",
+    "cover":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1510810322600&di=16630ef98f6f38d6ae256a4cacad14fd&imgtype=0&src=http%3A%2F%2Fwang1314.net%2Fuploadfile%2F2016%2F2016-12-08%2F1481191443801u_523126_uw_748_wh_408_hl_76519_l.jpg"
+  },
+  {
+    "title":"What is segnet?",
+    "author":"Chen Hao",
+    "type":"deeplearning",
+    "content":"how segnet work",
+    "cover":"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1510810360236&di=48eb0dbed0b6e80ef85fabb8bc14bd97&imgtype=0&src=http%3A%2F%2Fjoshua881228.webfactional.com%2Fmedia%2Fuploads%2FReadingNote%2FarXiv_SegNet%2FsegNet.png"
+  }
+]
