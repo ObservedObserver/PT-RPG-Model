@@ -3,6 +3,9 @@ var operateApp = new Vue({
   data:{
     test:0,
     location:0,
+    levels: [],
+    current_level:0,
+    info_location:-1,
     locations: [
       {
         name: "世界",
@@ -43,6 +46,33 @@ var operateApp = new Vue({
         active: 0
       }
     ],
+    achieve_town: [
+      {
+        name: "市场",
+        cover: "./images/city1.jpg",
+        content: "用于玩家交易",
+        active: 1,
+      },
+      {
+        name: "挑战区",
+        cover: "./images/city2.jpg",
+        content: "通往下一层的必经之路",
+        active: 0
+      },
+      {
+        name: "狩猎场",
+        cover: "./images/city3.jpg",
+        content: "用于练习升级",
+        active: 0
+      },
+      {
+        name: "学校",
+        cover: "./images/city4.jpg",
+        content: "获取攻略情报与技能",
+        active: 0
+      }
+    ],
+    current_achieve_town:0,
     subtown: -1,
     fileButtonName: "Choose",
     ans_file: false,
@@ -50,13 +80,19 @@ var operateApp = new Vue({
       content:"no data"
     },
     lessons:[],
-    current_lesson:{}
+    current_lesson:{},
+    achievements:[]
   },
   methods:{
+    gotoLevel:function(i){
+      this.current_level = i;
+    },
     gotoLocation:function(i){
       this.locations[this.location].style.active = false;
       this.locations[i].style.active = true;
       this.location = i;
+      this.info_location = -1;
+      infoApp.info_location = -1;
     },
     gotoSubtown:function(i){
       var self = this;
@@ -110,6 +146,12 @@ var operateApp = new Vue({
       this.current_lesson = this.lessons[i];
       this.town[this.subtown].active = 2;
     },
+    gotoAchievetown:function(i){
+
+      this.achieve_town[this.current_achieve_town].active = 0;
+      this.achieve_town[i].active = 1;
+      this.current_achieve_town = i;
+    },
     leaveLesson:function(){
       this.current_lesson = {};
       this.town[this.subtown].active = 1;
@@ -130,6 +172,13 @@ var operateApp = new Vue({
         this.ans_file = true;
         this.fileButtonName = "Submit";
       }
+    },
+    locationShow:function(l){
+      console.log("loc",l);
+      var ans = this.locations[l].style.active;
+      console.log("locationShow",ans);
+      ans &= (this.info_location == -1);
+      return ans;
     }
   },
   computed:{
@@ -139,7 +188,21 @@ var operateApp = new Vue({
         ans |= this.town[i].active;
       }
       return !ans;
-    }
+    },
+
+  },
+  mounted:function(){
+    var self = this;
+    console.log("begin ajax");
+    $.ajax({
+      url:"./server/problem/levels.json",
+      method:"get",
+      dataType:"json",
+      success:function(res){
+        console.log(res);
+        self.levels = res;
+      }
+    })
   }
 });
 var infoApp = new Vue({
@@ -151,6 +214,68 @@ var infoApp = new Vue({
       name:"Chen Hao",
       money:258,
       solved:72
+    },
+    info_location:0,
+    info_locations:[
+      {
+        name: "成就",
+        style: {
+            active: true
+        }
+      },
+      {
+        name: "装备",
+        style: {
+            active: false
+        }
+      },
+      {
+        name: "公会",
+        style: {
+            active: false
+        }
+      }
+    ],
+    town: [
+      {
+        name: "市场",
+        cover: "./images/city1.jpg",
+        content: "用于玩家交易",
+        active: 0
+      },
+      {
+        name: "挑战区",
+        cover: "./images/city2.jpg",
+        content: "通往下一层的必经之路",
+        active: 0
+      },
+      {
+        name: "狩猎场",
+        cover: "./images/city3.jpg",
+        content: "用于练习升级",
+        active: 0
+      },
+      {
+        name: "学校",
+        cover: "./images/city4.jpg",
+        content: "获取攻略情报与技能",
+        active: 0
+      }
+    ],
+    current_town: 0,
+  },
+  methods:{
+    gotoInfoLocation:function(i){
+      this.info_location = i;
+      operateApp.info_location = i;
+      $.ajax({
+        url:"./server/achievements.json",
+        method:"get",
+        dataType:"json",
+        success:function(res){
+          operateApp.achievements = res;
+        }
+      })
     }
   }
 });

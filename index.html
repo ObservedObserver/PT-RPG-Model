@@ -24,14 +24,11 @@
 
         <div class="twelve wide column" id="operate-app">
 
-          <div class="ui blue top attached trans segment" v-if="false">
+          <div class="ui blue top attached trans segment" v-if="info_location == 0">
             <div class="ui secondary pointing menu">
-              <a class="active item">城镇</a>
-              <a class="item">狩猎场</a>
-              <a class="item">挑战区</a>
-              <a class="item">BOSS</a>
+              <a v-for="(subtown,i) in achieve_town" :class="{active:subtown.active,item:true}" @click="gotoAchievetown(i)">{{subtown.name}}</a>
             </div>
-            <table class="ui celled padded inverted trans0 table">
+            <table v-for="(group,i) in achievements" v-if="current_achieve_town == i" class="ui celled padded inverted trans0 table">
               <thead>
                 <tr><th class="single line">成就评分</th>
                 <th>成就</th>
@@ -39,19 +36,19 @@
                 <th>描述</th>
               </tr></thead>
               <tbody>
-                <tr>
+                <tr v-for="achievement in group">
                   <td>
                     <h2 class="ui center aligned header">A</h2>
                   </td>
                   <td class="single line">
-                    Power Output
+                    {{achievement.grades}}
                   </td>
 
                   <td class="right aligned">
-                    80% <br>
-                    <a href="#">18 studies</a>
+                    {{achievement.status.rate * 100}}% <br>
+                    <a href="#">{{achievement.status.num}} studies</a>
                   </td>
-                  <td>Creatine supplementation is the reference compound for increasing muscular creatine levels; there is variability in this increase, however, with some nonresponders.</td>
+                  <td>{{achievement.content}}</td>
                 </tr>
                 <tr>
                   <td>
@@ -70,41 +67,67 @@
               </tbody>
             </table>
           </div>
-          <div class="ui blue top attached trans segment" v-if="locations[0].style.active">
+          <div class="ui blue top attached trans segment" v-if="info_location == 1">
             <div class="ui grid">
               <div class="six wide column" style="background-color:rgba(9, 97, 214, 0.18);color:rgba(255, 255, 255, 0.72)">
-                <div class="ui header">第一层：闪金镇</div>
+                <div class="ui basic segmet">
+                  <h2 class="ui header">史莱姆结晶</h2>
+                  <div class="ui fluid card">
+                    <div class="image">
+                      <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1511111668356&di=8cf6241c272239860afaff1491d3003c&imgtype=0&src=http%3A%2F%2Fcontent.52pk.com%2Ffiles%2F080814%2F75_155541.jpg">
+                    </div>
+                  </div>
+                  作用：获得一次代码评测使用O2加速的机会。
+                </div>
+              </div>
+              <div class="ten wide column">
+                <div class="ui basic segment">
+                  <div class="ui six column grid">
+                    <div class="column" v-for="i in [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]">
+                      <div class="ui fluid card">
+                        <div class="image">
+                          <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1511111668356&di=8cf6241c272239860afaff1491d3003c&imgtype=0&src=http%3A%2F%2Fcontent.52pk.com%2Ffiles%2F080814%2F75_155541.jpg">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="ui blue top attached trans segment" v-if="info_location == 2">
+
+          </div>
+          <div class="ui blue top attached trans segment" v-if="locationShow(0)">
+            <div class="ui grid">
+              <div class="six wide column" style="background-color:rgba(9, 97, 214, 0.18);color:rgba(255, 255, 255, 0.72)">
+                <div class="ui header">第{{levels[current_level].level}}层：{{levels[current_level].name}}</div>
                 cdscsd  c s c sdc
                 <div class="ui trans0 card">
                   <div class="image">
-                    <img src="images/city1.jpg" alt="">
+                    <img :src="levels[current_level].cover" alt="">
                   </div>
 
                 </div>
                 <div class="content">
-                  在闪金镇，有一个诡异的房间，楼下住着教导剥皮的训练师，是2个女人，而他们的男人失踪了，被质疑为那个女人杀了她的丈夫并把尸体藏在了柜子下面。在女人房间的楼上，正是5个暴风城的孩子，而这5个孩子所在的房间内有着诡异的音乐！与其他孩子不同，他们不会四处打闹，他们始终盯着墙看，仿佛发现了什么我们看不见的东西。他们站成了五芒星的阵形，随着时间不同，他们站的位置不同，并且最终消失在墙里！
+                  {{levels[current_level].content}}
                 </div>
                 <div class="ui divider">
 
                 </div>
                 <div class="extra content">
-                  <button class="ui inverted green button" type="button" name="button">前往闪金镇</button>
+                  <button class="ui inverted green button" type="button" name="button" @click="gotoLocation(1)">前往{{levels[current_level].name}}</button>
                 </div>
               </div>
               <div class="ten wide column">
-                <div class="ui red inverted segment">
-                  第三层: 铁炉堡
+                <div class="ui basic segment" v-for="(level,i) in levels">
+                  <button class="ui fluid button" type="button" name="button" @click="gotoLevel(i)">{{level.name}}</button>
                 </div>
-                <div class="ui orange inverted segment">
-                  第二层: 暴风城
-                </div>
-                <div class="ui yellow inverted segment">
-                  第一层: 闪金镇
-                </div>
+
               </div>
             </div>
           </div>
-          <div class="ui blue top attached trans segment" v-if="locations[1].style.active">
+          <div class="ui blue top attached trans segment" v-if="locationShow(1)">
             <div class="ui grid" v-if="townOverview">
               <div class="eight wide column" v-for="(district,i) in town">
                 <div class="ui trans0 card" style="margin:auto">
@@ -225,9 +248,7 @@
 
             </div>
             <div class="ui trans0 inverted vertical pointing menu">
-              <a class="active item">成就</a>
-              <a class="item">装备</a>
-              <a class="item">公会</a>
+              <a class="item" v-for="(loc,i) in info_locations" @click="gotoInfoLocation(i)">{{loc.name}}</a>
             </div>
           </div>
         </div>

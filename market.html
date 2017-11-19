@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="./semantic/semantic.css">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js">
+
+    </script>
+    <script src="semantic/semantic.js">
+
+    </script>
+    <script src="./vue.js">
+
+    </script>
+  </head>
+  <body>
+    <div class="ui container">
+      <div class="ui segment" id="market">
+        <h1 class="ui header">Market</h1>
+        <div class="ui four column grid" v-if="market_overview">
+          <div class="column" v-for="(product,i) in products">
+            <div class="ui link card" @click="gotoProduct(i)">
+              <div class="content">
+                <div class="right floated meta">{{product.price}} gold</div>
+                <img class="ui avatar image" :src="product.publisher.image">
+                {{product.publisher.name}}
+              </div>
+              <div class="image">
+                <img :src="product.image">
+              </div>
+              <div class="content">
+                <h3 class="ui header">{{product.name}}</h3>
+                <span class="right floated"> <i class="heart outline like icon"></i> {{product.likes}} likes </span>
+              </div>
+              <div class="extra content">
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div v-if="!market_overview">
+          <div class="ui grid">
+            <div class="four wide column">
+              <div class="ui card">
+                <div class="ui image">
+                  <img :src="products[current_product].image" alt="">
+                </div>
+              </div>
+            </div>
+            <div class="twelve wide column">
+              <div class="ui segment">
+                <h2 class="ui header">{{products[current_product].name}}</h2>
+                <ul class="ui list">
+                  <li>{{products[current_product].publisher.name}}</li>
+                  <li>Price: {{products[current_product].price}}</li>
+                  <li>{{products[current_product].likes}} <i class="ui heart icon"></i></li>
+                  <li>?</li>
+                  <li>?</li>
+                  <li>?</li>
+                  <li>?</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="ui segment">
+            <button class="ui green button" type="button" name="button">Buy</button>
+            <button class="ui red button"type="button" name="button" @click="leaveProduct()">Leave</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      var market = new Vue({
+        el: "#market",
+        data:{
+          market_overview: true,
+          products:[
+            {
+              name: "O2加速",
+              image: "http://www.semantic-ui.cn/images/wireframe/image.png",
+              publisher:{
+                name:"Elliot",
+                image:"http://www.semantic-ui.cn/images/avatar/large/elliot.jpg"
+              },
+              price:14,
+              likes:17
+            },
+            {
+              name: "Boss题目提示",
+              image: "http://www.semantic-ui.cn/images/wireframe/image.png",
+              publisher:{
+                name:"Elliot",
+                image:"http://www.semantic-ui.cn/images/avatar/large/elliot.jpg"
+              },
+              price:2,
+              likes:178
+            },
+            {
+              name: "PT-API",
+              image: "http://www.semantic-ui.cn/images/wireframe/image.png",
+              publisher:{
+                name: "stevie",
+                image: "http://www.semantic-ui.cn/images/avatar/large/stevie.jpg"
+              },
+              price:114,
+              likes:7
+            },
+            {
+              name: "下载加速",
+              image: "http://www.semantic-ui.cn/images/wireframe/image.png",
+              publisher:{
+                name: "veronika",
+                image: "http://www.semantic-ui.cn/images/avatar/large/veronika.jpg"
+              },
+              price:72,
+              likes:28
+            },
+            {
+              name: "上传加速",
+              image: "http://www.semantic-ui.cn/images/wireframe/image.png",
+              publisher:{
+                name:"Elliot",
+                image:"http://www.semantic-ui.cn/images/avatar/large/elliot.jpg"
+              },
+              price:321,
+              likes:2
+            },
+            {
+              name: "下载加速",
+              image: "http://www.semantic-ui.cn/images/wireframe/image.png",
+              publisher:{
+                name: "veronika",
+                image: "http://www.semantic-ui.cn/images/avatar/large/veronika.jpg"
+              },
+              price:72,
+              likes:28
+            },
+            {
+              name: "上传加速",
+              image: "http://www.semantic-ui.cn/images/wireframe/image.png",
+              publisher:{
+                name:"Elliot",
+                image:"http://www.semantic-ui.cn/images/avatar/large/elliot.jpg"
+              },
+              price:321,
+              likes:2
+            }
+
+          ],
+          current_product:0
+        },
+        methods:{
+          gotoProduct:function(i){
+            this.current_product = i;
+            this.market_overview = false;
+          },
+          leaveProduct:function(){
+            this.current_product = 0;
+            this.market_overview = true;
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="semantic/semantic.css">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js">
+
+    </script>
+    <script src="semantic/semantic.js">
+
+    </script>
+    <script src="vue.js">
+
+    </script>
+  </head>
+  <body>
+    <div class="ui container">
+      <div class="ui segment" id="union">
+        <div class="ui modal">
+          <div class="header">{{members[current_member].name}}</div>
+          <div class="ui basic segment">
+            <div class="ui grid">
+              <div class="six wide column">
+                <div class="ui card">
+                  <div class="ui image">
+                    <img :src="members[current_member].image" alt="">
+                  </div>
+                </div>
+              </div>
+              <div class="ten wide column">
+                <div class="content">
+                  <ul class="ui list">
+                    <li>{{members[current_member].name}}</li>
+                    <li>{{members[current_member].job}}</li>
+                    <li>{{members[current_member].email}}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="actions">
+            <div class="ui yellow button">任命</div>
+            <div class="ui red button">解雇</div>
+          </div>
+        </div>
+        <div class="ui grid">
+          <div class="seven wide column">
+            <div class="ui segment">
+              <h1 class="ui header">公会公告栏</h1>
+              <p class="content">
+                生活在铁炉堡的矮人是一支古老的种族，这些精力充沛而又有些古板的种族一直以来都居住在卡兹莫丹白雪皑皑的山脉之下。长久以来，矮人都是人类最忠诚的盟友，他们对战斗和讲故事有着特殊的爱好。在过去的岁月中，矮人很少离开防守坚固的城堡。然而，当战争的号角被吹响的时候，他们会表现出无与伦比的勇气和作战精神，为了保卫自己的朋友和盟友而作战。根据最新出现的关于矮人起源的相关考古报告，矮人这个种族自从诞生以来已经发生了显著的变化。根据这份发现报告，矮人是由万能的泰坦在这个世界还处于摇篮阶段时利用石头所创造的。因此他们感觉自己的使命是要搜索整个世界，寻找更多关于他们种族历史的遗迹，同时还要找寻泰坦所留下的遗产。为了这一目的，矮人向世界各地派出了勘察员以期发现揭示他们谜一般过去的线索。他们足迹遍布整个大陆，在那里留下了一个个矮人的挖掘场，这些挖掘场有些成为了前沿哨所，有些则成为了矮人用以御敌的基地。
+              </p>
+            </div>
+            <div class="ui segment">
+              <h1 class="ui header">公会成员</h1>
+              <div class="ui top tabular menu">
+                <a class="item" v-for="(type,i) in member_type" @click="changeMemberType(i)" :class="type.style">{{type.title}}</a>
+              </div>
+              <div class="ui bottom attached segment" v-if="current_member_type == 0">
+                <div class="ui four column grid">
+                  <div class="column" v-for="(member,i) in members">
+                    <div class="ui link card" @click="checkUser(i)">
+                      <div class="ui image">
+                        <img :src="member.image" alt="">
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="ui bottom attached segment" v-if="current_member_type == 1">
+                <table class="ui very basic collapsing celled table">
+                  <thead>
+                    <tr><th>成员</th>
+                    <th>email</th>
+                    <th>操作</th>
+                  </tr></thead>
+                  <tbody>
+                    <tr v-for="(new_member,i) in new_members">
+                      <td>
+                        <h4 class="ui image header">
+                          <img :src="new_member.image" class="ui mini rounded image">
+                          <div class="content">{{new_member.name}}
+                        </div>
+                      </h4></td>
+                      <td>
+                        {{new_member.email}}
+                      </td>
+                      <td>
+
+                          <i class="ui green checkmark link icon"></i>
+                          <i class="ui red remove link icon"></i>
+
+                      </td>
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+          </div>
+          <div class="nine wide column">
+            <div class="ui segment">
+              <h1 class="ui header">公会成就</h1>
+              <table class="ui celled padded table">
+                <thead>
+                  <tr><th class="single line">Evidence Rating</th>
+                  <th>Effect</th>
+                  <th>Efficacy</th>
+                  <th>Consensus</th>
+
+                </tr></thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <h2 class="ui center aligned header">A</h2>
+                    </td>
+                    <td class="single line">闪金镇-Boss[Best Solution]</td>
+                    <td>
+                      <div class="ui star rating" data-rating="3" data-max-rating="3"></div>
+                    </td>
+                    <td class="right aligned">80% <br> <a href="#">18 组数据</a> </td>
+
+                  <tr>
+                    <td>
+                      <h2 class="ui center aligned header">A</h2>
+                    </td>
+                    <td class="single line">铁炉堡-Boss[cititation]</td>
+                    <td>
+                      <div class="ui star rating" data-rating="3" data-max-rating="3"></div>
+                    </td>
+                    <td class="right aligned">99% <br> <a href="#">65组数据</a> </td>
+
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="ui segment">
+              <h1 class="ui header">公会资源</h1>
+              <div class="ui divided items">
+                <div class="item">
+                  <div class="image">
+                    <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1511123545293&di=9a585f9e6a55896f6b3c6add44430638&imgtype=0&src=http%3A%2F%2Fpic.baike.soso.com%2Fp%2F20110325%2F20110325093916-1989138490.jpg">
+                  </div>
+                  <div class="content">
+                    <a class="header">动态可持久化仙人掌</a>
+                    <div class="meta">
+                      2017.10.4
+                    </div>
+                    <div class="description">
+                      <p></p>
+                    </div>
+                    <div class="extra">
+                      <div class="ui label">数据结构</div>
+                      <button class="ui right floated green button" type="button" name="button">Watch</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="image">
+                    <img src="https://gss1.bdstatic.com/-vo3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=dc7c75316d09c93d13ff06a5fe5493b9/f3d3572c11dfa9ec9f78692868d0f703918fc1be.jpg">
+                  </div>
+                  <div class="content">
+                    <a class="header">模拟退火</a>
+                    <div class="meta">
+                      2017.11.12
+                    </div>
+                    <div class="description">
+                      <p></p>
+                    </div>
+                    <div class="extra">
+                      <div class="ui label">算法</div>
+                      <button class="ui right floated green button" type="button" name="button">Watch</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="image">
+                    <img src="https://gss1.bdstatic.com/9vo3dSag_xI4khGkpoWK1HF6hhy/baike/c0%3Dbaike80%2C5%2C5%2C80%2C26/sign=6af5faf93112b31bd361c57be7715d1f/0df431adcbef7609524eff2126dda3cc7dd99ec2.jpg">
+                  </div>
+                  <div class="content">
+                    <a class="header">费马小定理</a>
+                    <div class="meta">
+                      2017.10.14
+                    </div>
+                    <div class="description">
+                      <p></p>
+                    </div>
+                    <div class="extra">
+                      <div class="ui label">
+                        数论
+                      </div>
+                      <button class="ui right floated green button" type="button" name="button">Watch</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      var app = new Vue({
+        el: "#union",
+        data:{
+          member_type:[
+            {
+              title:"现有成员",
+              style:{
+                active:true
+              }
+            },
+            {
+              title:"申请成员",
+              style:{
+                active:false
+              }
+            }
+          ],
+          current_member_type:0,
+          members:[
+            {
+              name: "steve",
+              image: "http://www.semantic-ui.cn/images/avatar/large/steve.jpg",
+              email: "chenhao@phantomtiger.com",
+              job: "normal member"
+            },
+            {
+              name: "daniel",
+              image: "http://www.semantic-ui.cn/images/avatar/large/daniel.jpg",
+              email: "chenhao@phantomtiger.com",
+              job: "normal member"
+            },
+            {
+              name: "elyse",
+              image: "http://www.semantic-ui.cn/images/avatar2/large/elyse.png",
+              email: "chenhao@phantomtiger.com",
+              job: "normal member"
+            },
+            {
+              name: "stevie",
+              image: "http://www.semantic-ui.cn/images/avatar/large/stevie.jpg",
+              email: "chenhao@phantomtiger.com",
+              job: "normal member"
+            },
+            {
+              name: "veronika",
+              image: "http://www.semantic-ui.cn/images/avatar/large/veronika.jpg",
+              email: "chenhao@phantomtiger.com",
+              job: "normal member"
+            },
+            {
+              name: "jenny",
+              image: "http://www.semantic-ui.cn/images/avatar/large/jenny.jpg",
+              email: "chenhao@phantomtiger.com",
+              job: "normal member"
+            },
+            {
+              name: "stevie",
+              image: "http://www.semantic-ui.cn/images/avatar/large/stevie.jpg",
+              email: "chenhao@phantomtiger.com",
+              job: "normal member"
+            },
+            {
+              name: "veronika",
+              image: "http://www.semantic-ui.cn/images/avatar/large/veronika.jpg",
+              email: "chenhao@phantomtiger.com",
+              job: "normal member"
+            },
+            {
+              name: "jenny",
+              image: "http://www.semantic-ui.cn/images/avatar/large/jenny.jpg",
+              email: "chenhao@phantomtiger.com",
+              job: "normal member"
+            }
+
+          ],
+          current_member:0,
+          new_members:[
+            {
+              name: "jenny",
+              image: "http://www.semantic-ui.cn/images/avatar/large/jenny.jpg",
+              email: "chenhao@phantomtiger.com",
+              job: "normal member"
+            },
+            {
+              name: "stevie",
+              image: "http://www.semantic-ui.cn/images/avatar/large/stevie.jpg",
+              email: "chenhao@phantomtiger.com",
+              job: "normal member"
+            },
+            {
+              name: "veronika",
+              image: "http://www.semantic-ui.cn/images/avatar/large/veronika.jpg",
+              email: "chenhao@phantomtiger.com",
+              job: "normal member"
+            },
+            {
+              name: "jenny",
+              image: "http://www.semantic-ui.cn/images/avatar/large/jenny.jpg",
+              email: "chenhao@phantomtiger.com",
+              job: "normal member"
+            }
+          ],
+          current_new_member:0
+        },
+        methods:{
+          checkUser:function(i){
+            this.current_member = i;
+            $('.ui.modal').modal('show');
+          },
+          changeMemberType:function(i){
+            this.member_type[this.current_member_type].style.active = false;
+            this.member_type[i].style.active = true;
+            this.current_member_type = i;
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
